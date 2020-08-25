@@ -5,6 +5,8 @@
     <meta charset="UTF-8"/>
 </head>
 <body>
-${hello}
+<#list recipes as recipe>
+    <a href="${recipe}">${recipe}</a>
+</#list>
 </body>
 </html>
