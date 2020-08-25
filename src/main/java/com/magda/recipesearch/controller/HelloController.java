@@ -10,6 +10,11 @@ public class HelloController {
     @GetMapping("/")
     public String helloWorld(Model model) {
         model.addAttribute("hello", "hello World!");
+        try {
+            CrawlerController.crawl();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "index";
     }
 }
