@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Crawler extends WebCrawler {
@@ -49,12 +50,19 @@ public class Crawler extends WebCrawler {
 
     private boolean containAllWords(String recipe) {
         boolean result = true;
-        for (String word : ingredients) {
-            if (!recipe.contains(word)) {
+        for (String ingredient : ingredients) {
+            if (!containsWord(ingredient, recipe)) {
                 result = false;
                 break;
             }
         }
         return result;
+    }
+
+    private boolean containsWord(String word, String source) {
+        String pattern = "\\b" + word + "\\b";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(source);
+        return m.find();
     }
 }
