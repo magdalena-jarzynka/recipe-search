@@ -6,7 +6,7 @@
 </head>
 <body>
 <#list recipes as recipe>
-    <a href="${recipe}">${recipe}</a>
+    <p><a href="${recipe}">${recipe}</a></p>
 </#list>
 </body>
 </html>

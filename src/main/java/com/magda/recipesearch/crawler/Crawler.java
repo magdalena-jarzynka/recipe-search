@@ -9,16 +9,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Crawler extends WebCrawler {
 
     private static final Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz))$");
-    private final String ingredient;
+    private final List<String> ingredients;
     private final Recipe recipe;
 
-    public Crawler(String ingredient, Recipe recipe) {
-        this.ingredient = ingredient;
+    public Crawler(List<String> ingredients, Recipe recipe) {
+        this.ingredients = ingredients;
         this.recipe = recipe;
     }
 
@@ -39,10 +40,21 @@ public class Crawler extends WebCrawler {
             Document document = Jsoup.parse(html);
             Elements divs = document.select("div.article__content");
 
-            if (url.startsWith("https://www.mojewypieki.com/przepis/") && divs.text().contains(ingredient)) {
+            if (url.startsWith("https://www.mojewypieki.com/przepis/") && containAllWords(divs.text())) {
                 recipe.getRecipeUrls().add(url);
                 System.out.println("URL: " + url);
             }
         }
+    }
+
+    private boolean containAllWords(String recipe) {
+        boolean result = true;
+        for (String word : ingredients) {
+            if (!recipe.contains(word)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }

@@ -7,8 +7,10 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
+import java.util.List;
+
 public class CrawlerController {
-    public static void crawl(String ingredient, Recipe recipe) throws Exception {
+    public static void crawl(List<String> ingredients, Recipe recipe) throws Exception {
 
         String crawlStorageFolder = "data/crawl/root";
         int maxPagesToFetch = 50;
@@ -27,7 +29,7 @@ public class CrawlerController {
 
         controller.addSeed("https://www.mojewypieki.com");
 
-        CrawlController.WebCrawlerFactory<Crawler> factory = () -> new Crawler(ingredient, recipe);
+        CrawlController.WebCrawlerFactory<Crawler> factory = () -> new Crawler(ingredients, recipe);
 
         controller.start(factory, numberOfCrawlers);
     }

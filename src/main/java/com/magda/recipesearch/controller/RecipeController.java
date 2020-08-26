@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class RecipeController {
 
@@ -19,10 +21,10 @@ public class RecipeController {
     }
 
     @GetMapping("/")
-    public String helloWorld(Model model, @RequestParam String ingredient) {
+    public String helloWorld(Model model, @RequestParam(name = "ingredient") List<String> ingredients) {
         model.addAttribute("recipes", recipe.getRecipeUrls());
         try {
-            CrawlerController.crawl(ingredient, recipe);
+            CrawlerController.crawl(ingredients, recipe);
         } catch (Exception e) {
             e.printStackTrace();
         }
