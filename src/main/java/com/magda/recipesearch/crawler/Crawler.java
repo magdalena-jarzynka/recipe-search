@@ -1,6 +1,7 @@
 package com.magda.recipesearch.crawler;
 
 import com.magda.recipesearch.Recipe;
+import com.magda.recipesearch.SearchResult;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -17,11 +18,11 @@ public class Crawler extends WebCrawler {
 
     private static final Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz))$");
     private final List<String> ingredients;
-    private final Recipe recipe;
+    private final SearchResult searchResult;
 
-    public Crawler(List<String> ingredients, Recipe recipe) {
+    public Crawler(List<String> ingredients, SearchResult searchResult) {
         this.ingredients = ingredients;
-        this.recipe = recipe;
+        this.searchResult = searchResult;
     }
 
     @Override
@@ -40,10 +41,20 @@ public class Crawler extends WebCrawler {
             String html = htmlParseData.getHtml();
             Document document = Jsoup.parse(html);
             Elements divs = document.select("div.article__content");
+            Elements title = document.select("div.title");
+            Elements images = divs.select("img");
+            String imageUrl = images.attr("data-src");
+
 
             if (url.startsWith("https://www.mojewypieki.com/przepis/") && containAllWords(divs.text())) {
-                recipe.getRecipeUrls().add(url);
-                System.out.println("URL: " + url);
+                Recipe recipe = new Recipe();
+                recipe.setUrl(url);
+                recipe.setTitle(title.text());
+                recipe.setImageUrl(imageUrl);
+                searchResult.getRecipes().add(recipe);
+                System.out.println("Title: " + recipe.getTitle());
+                System.out.println("URL: " + recipe.getUrl());
+                System.out.println("ImageUrl: " + recipe.getImageUrl());
             }
         }
     }

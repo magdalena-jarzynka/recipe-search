@@ -6,7 +6,8 @@
 </head>
 <body>
 <#list recipes as recipe>
-    <p><a href="${recipe}">${recipe}</a></p>
+    <p><img src="${recipe.imageUrl}" alt="Photo" width="400" height="600"></p>
+    <p><a href="${recipe.url}">${recipe.title}</a></p>
 </#list>
 </body>
 </html>

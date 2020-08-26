@@ -1,6 +1,6 @@
 package com.magda.recipesearch.controller;
 
-import com.magda.recipesearch.Recipe;
+import com.magda.recipesearch.SearchResult;
 import com.magda.recipesearch.crawler.CrawlerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,18 +13,18 @@ import java.util.List;
 @Controller
 public class RecipeController {
 
-    Recipe recipe;
+    SearchResult searchResult;
 
     @Autowired
-    public RecipeController(Recipe recipe) {
-        this.recipe = recipe;
+    public RecipeController(SearchResult searchResult) {
+        this.searchResult = searchResult;
     }
 
     @GetMapping("/")
     public String helloWorld(Model model, @RequestParam(name = "ingredient") List<String> ingredients) {
-        model.addAttribute("recipes", recipe.getRecipeUrls());
+        model.addAttribute("recipes", searchResult.getRecipes());
         try {
-            CrawlerController.crawl(ingredients, recipe);
+            CrawlerController.crawl(ingredients, searchResult);
         } catch (Exception e) {
             e.printStackTrace();
         }
