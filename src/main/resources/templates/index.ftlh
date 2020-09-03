@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/easy-loading.min.css">
 </head>
 <body>
 
 <div class="container">
-
 
     <div class="input-group mb-3">
     <select class="form-control" multiple="multiple">
@@ -20,7 +20,6 @@
         <button class="btn btn-primary" type="submit" onclick="search()">Szukaj</button>
         </div>
     </div>
-
 
     <div class="search-result-display">
     </div>
@@ -38,6 +37,7 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="js/easy-loading.min.js"></script>
 <script type="text/javascript" src="js/multi-select-box.js"></script>
 <script type="text/javascript" src="js/search-script.js"></script>
 
