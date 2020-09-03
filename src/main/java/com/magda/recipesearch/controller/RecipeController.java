@@ -5,6 +5,7 @@ import com.magda.recipesearch.crawler.CrawlerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,12 +22,15 @@ public class RecipeController {
     }
 
     @GetMapping("/")
-    public String helloWorld(Model model, @RequestParam(name = "ingredient") List<String> ingredients) {
+    public String helloWorld(Model model, @RequestParam(name = "ingredient", required = false) List<String> ingredients) {
         model.addAttribute("recipes", searchResult.getRecipes());
-        try {
-            CrawlerController.crawl(ingredients, searchResult);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!CollectionUtils.isEmpty(ingredients)) {
+            try {
+                CrawlerController.crawl(ingredients, searchResult);
+                return "search-result-display";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return "index";
     }
