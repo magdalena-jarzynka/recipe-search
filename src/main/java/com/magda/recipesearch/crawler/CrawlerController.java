@@ -33,6 +33,8 @@ public class CrawlerController {
 
         controller.addSeed("https://www.mojewypieki.com");
 
+        searchResult.getRecipes().clear();
+
         CrawlController.WebCrawlerFactory<Crawler> factory = () -> new Crawler(ingredients, searchResult);
 
         controller.start(factory, numberOfCrawlers);

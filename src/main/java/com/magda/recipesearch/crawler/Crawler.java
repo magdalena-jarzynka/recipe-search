@@ -45,7 +45,6 @@ public class Crawler extends WebCrawler {
             Elements images = divs.select("img");
             String imageUrl = images.attr("data-src");
 
-
             if (url.startsWith("https://www.mojewypieki.com/przepis/") && containAllWords(divs.text())) {
                 Recipe recipe = new Recipe();
                 recipe.setUrl(url);
