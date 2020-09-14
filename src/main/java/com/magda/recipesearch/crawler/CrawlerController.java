@@ -17,13 +17,13 @@ public class CrawlerController {
     public static void crawl(List<String> ingredients, SearchResult searchResult) throws Exception {
 
         String crawlStorageFolder = "data/crawl/root";
-        int maxPagesToFetch = 50;
+//        int maxPagesToFetch = 500;
         int numberOfCrawlers = 7;
         int maxDepthOfCrawling = 1;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
-        config.setMaxPagesToFetch(maxPagesToFetch);
+//        config.setMaxPagesToFetch(maxPagesToFetch);
         config.setMaxDepthOfCrawling(maxDepthOfCrawling);
 
         PageFetcher pageFetcher = new PageFetcher(config);
@@ -31,8 +31,9 @@ public class CrawlerController {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        controller.addSeed("https://www.mojewypieki.com");
-
+        for (int i = 1; i <= 150; i++) {
+            controller.addSeed("https://www.mojewypieki.com/posty/?_paged=" + i);
+        }
         searchResult.getRecipes().clear();
 
         CrawlController.WebCrawlerFactory<Crawler> factory = () -> new Crawler(ingredients, searchResult);
