@@ -1,5 +1,6 @@
 package com.magda.recipesearch.crawler;
 
+import com.magda.recipesearch.Ingredient;
 import com.magda.recipesearch.Recipe;
 import com.magda.recipesearch.SearchResult;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -8,6 +9,7 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.List;
@@ -44,6 +46,15 @@ public class Crawler extends WebCrawler {
             Elements title = document.select("div.title");
             Elements images = divs.select("img");
             String imageUrl = images.attr("data-src");
+            Elements recipeLists = divs.select("ul");
+            Elements recipeIngredients = recipeLists.select("li");
+
+            for (Element element : recipeIngredients) {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setName(element.text());
+                searchResult.getIngredients().add(ingredient);
+                System.out.println(ingredient.getName());
+            }
 
             if (url.startsWith("https://www.mojewypieki.com/przepis/") && containAllWords(divs.text())) {
                 Recipe recipe = new Recipe();

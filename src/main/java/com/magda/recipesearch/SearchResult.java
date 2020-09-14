@@ -10,8 +10,13 @@ import java.util.List;
 public class SearchResult {
 
     private List<Recipe> recipes = Collections.synchronizedList(new ArrayList<>());
+    private List<Ingredient> ingredients = Collections.synchronizedList(new ArrayList<>());
 
     public List<Recipe> getRecipes() {
         return recipes;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 }
