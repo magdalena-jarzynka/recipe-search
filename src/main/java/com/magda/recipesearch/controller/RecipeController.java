@@ -28,7 +28,7 @@ public class RecipeController {
     }
 
     @GetMapping("/")
-    public String helloWorld(Model model, @RequestParam(name = "ingredient", required = false) List<String> ingredients) {
+    public String searchRecipes(Model model, @RequestParam(name = "ingredient", required = false) List<String> ingredients) {
         model.addAttribute("recipes", searchResult.getRecipes());
         if (!CollectionUtils.isEmpty(ingredients)) {
             try {

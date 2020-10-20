@@ -17,13 +17,13 @@ public class CrawlerController {
     public static void crawl(List<String> ingredients, SearchResult searchResult) throws Exception {
 
         String crawlStorageFolder = "data/crawl/root";
-//        int maxPagesToFetch = 500;
+        int maxPagesToFetch = 50;
         int numberOfCrawlers = 7;
         int maxDepthOfCrawling = 1;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
-//        config.setMaxPagesToFetch(maxPagesToFetch);
+        config.setMaxPagesToFetch(maxPagesToFetch);
         config.setMaxDepthOfCrawling(maxDepthOfCrawling);
 
         PageFetcher pageFetcher = new PageFetcher(config);
