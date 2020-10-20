@@ -12,7 +12,10 @@ Currently crawler will fire every time we press search. It will take a lot of ti
 Next step is to add a database and crawl the website once, store results in the database and serve it immediately after search from DB.
 You can search by choosing ingredients form the list 
 (only "kakao" for now; this is done to cover all form of polish words in the future eg. cukier puder =	puder|pudru) or by typing ingredients yourself.
-Example search results:<insert screenshot>
+Example search results:
+  
+![screenshot-1](https://user-images.githubusercontent.com/63010423/96593671-0fb37b00-12ea-11eb-9b07-18ae1f066beb.png)
+
 
 ## Milestones 
 - [x] Find library and implement crawler - crawler4j chosen and implemented to crawl through mojewypieki.com recipes list
