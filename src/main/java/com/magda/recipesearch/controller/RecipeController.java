@@ -10,10 +10,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,15 +25,13 @@ public class RecipeController {
     }
 
     @GetMapping("/")
-    public String searchRecipes(Model model, @RequestParam(name = "ingredient", required = false) List<String> ingredients) {
+    public String searchRecipes(Model model, @RequestParam(name = "ingredient", required = false) List<String> ingredientNames) {
         model.addAttribute("recipes", searchResult.getRecipes());
-        if (!CollectionUtils.isEmpty(ingredients)) {
+        model.addAttribute("allIngredients", Arrays.stream(Ingredient.values()).map(Ingredient::getDisplayName).sorted().collect(Collectors.toList()));
+        if (!CollectionUtils.isEmpty(ingredientNames)) {
+            List<Ingredient> ingredients = ingredientNames.stream().map(Ingredient::mapDisplayNameToIngredient).collect(Collectors.toList());
             try {
                 CrawlerController.crawl(ingredients, searchResult);
-
-                Path file = Paths.get("list-of-all-ingredients.txt");
-                Files.write(file, searchResult.getIngredients().stream().map(Ingredient::getName).collect(Collectors.toList()), StandardCharsets.UTF_8);
-
                 return "search-result-display";
             } catch (Exception e) {
                 e.printStackTrace();

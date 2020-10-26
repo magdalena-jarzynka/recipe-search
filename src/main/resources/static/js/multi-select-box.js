@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $(".form-control").select2({
-        tags: true,
+        tags: false,
         placeholder: "Wpisz lub wybierz składniki z listy..."
     });
 });

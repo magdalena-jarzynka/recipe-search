@@ -1,6 +1,5 @@
 package com.magda.recipesearch.crawler;
 
-import com.magda.recipesearch.Ingredient;
 import com.magda.recipesearch.Recipe;
 import com.magda.recipesearch.SearchResult;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -9,7 +8,6 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.List;
@@ -19,11 +17,11 @@ import java.util.regex.Pattern;
 public class Crawler extends WebCrawler {
 
     private static final Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz))$");
-    private final List<String> ingredients;
+    private final List<String> ingredientRegexes;
     private final SearchResult searchResult;
 
-    public Crawler(List<String> ingredients, SearchResult searchResult) {
-        this.ingredients = ingredients;
+    public Crawler(List<String> ingredientRegexes, SearchResult searchResult) {
+        this.ingredientRegexes = ingredientRegexes;
         this.searchResult = searchResult;
     }
 
@@ -47,16 +45,9 @@ public class Crawler extends WebCrawler {
             Elements images = divs.select("img");
             String imageUrl = images.attr("data-src");
             Elements recipeLists = divs.select("ul");
-            Elements recipeIngredients = recipeLists.select("li");
 
-            for (Element element : recipeIngredients) {
-                Ingredient ingredient = new Ingredient();
-                ingredient.setName(element.text());
-                searchResult.getIngredients().add(ingredient);
-                System.out.println(ingredient.getName());
-            }
 
-            if (url.startsWith("https://www.mojewypieki.com/przepis/") && containAllWords(divs.text())) {
+            if (url.startsWith("https://www.mojewypieki.com/przepis/") && containAllWords(recipeLists.text())) {
                 Recipe recipe = new Recipe();
                 recipe.setUrl(url);
                 recipe.setTitle(title.text());
@@ -71,7 +62,7 @@ public class Crawler extends WebCrawler {
 
     private boolean containAllWords(String recipe) {
         boolean result = true;
-        for (String ingredient : ingredients) {
+        for (String ingredient : ingredientRegexes) {
             if (!containsWord(ingredient, recipe)) {
                 result = false;
                 break;
@@ -80,8 +71,7 @@ public class Crawler extends WebCrawler {
         return result;
     }
 
-    private boolean containsWord(String word, String source) {
-        String pattern = "\\b" + word + "\\b";
+    private boolean containsWord(String pattern, String source) {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(source);
         return m.find();
