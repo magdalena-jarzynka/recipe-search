@@ -14,7 +14,25 @@
 
     <div class="input-group mb-3">
     <select class="form-control" multiple="multiple">
+        <option>cukier puder</option>
+        <option>cukier</option>
+        <option>czekolada biała</option>
+        <option>czekolada deserowa</option>
+        <option>czekolada gorzka</option>
+        <option>czekolada mleczna</option>
+        <option>ekstrakt z wanilii</option>
+        <option>jajka</option>
+        <option>jogurt (naturalny lub grecki)</option>
         <option>kakao</option>
+        <option>masło</option>
+        <option>mleko</option>
+        <option>mąka pszenna</option>
+        <option>nutella</option>
+        <option>proszek do pieczenia</option>
+        <option>serek mascarpone</option>
+        <option>skrobia ziemniaczana</option>
+        <option>śmietana kremówka 30% lub 36%</option>
+        <option>twaróg</option>
     </select>
         <div class="input-group-append">
         <button class="btn btn-primary" type="submit" onclick="search()">Szukaj</button>
