@@ -14,7 +14,8 @@ Next step is to add a database and crawl the website once, store results in the 
 At this point you can search by choosing ingredients from the list.
 Example search results:
   
-![screenshot-1](https://user-images.githubusercontent.com/63010423/96593671-0fb37b00-12ea-11eb-9b07-18ae1f066beb.png)
+![Screenshot from 2020-10-28 18-18-44](https://user-images.githubusercontent.com/63010423/97472519-3573fc00-194a-11eb-85c7-a7517d8665a6.png)
+![Screenshot from 2020-10-28 18-19-21](https://user-images.githubusercontent.com/63010423/97472541-3ad14680-194a-11eb-87ad-72248e90f300.png)
 
 
 ## Milestones 
@@ -25,5 +26,5 @@ Example search results:
 - [ ] Add database and store crawl results to avoid crawling with every request (crawl only on application start)
 - [x] Create regex matchers for most common ingredients to match multiple polish forms (cukier puder =	puder|pudru)
 - [ ] Add scheduler to crawler to update results periodically
-- [ ] Beautify main page, add header and footer.
+- [x] Beautify main page, add header.
 - [ ] User accounts (to save favourites etc.)

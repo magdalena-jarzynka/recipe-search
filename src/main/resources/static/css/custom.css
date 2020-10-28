@@ -25,10 +25,50 @@
     font-size: 18px;
 }
 
+.btn:focus {
+    outline: none;
+}
+
 .linkedin-img {
     height: 32px;
 }
 
 .topbar ul li {
     text-transform: none;
+}
+
+.icon-center {
+    background: linear-gradient(45deg, #ae7b3a 1%, #23110a 100%);
+}
+
+.section-title hr {
+    background: linear-gradient(45deg, #ae7b3a 1%, #23110a 100%);
+}
+
+.recipe-photo {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+h4.text-on-image {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    background-color: #ffffffc2;
+}
+
+.service-details {
+    position: relative;
+    padding: 0;
+    margin: 20px;
+}
+
+.service-wrapper {
+    border-bottom: 1px dashed #ae7b3a;
+}
+
+.service-wrapper:hover {
+    border-color: #ae7b3a;
 }
