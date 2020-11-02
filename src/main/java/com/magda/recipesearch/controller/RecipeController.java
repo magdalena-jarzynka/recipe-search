@@ -1,7 +1,7 @@
 package com.magda.recipesearch.controller;
 
-import com.magda.recipesearch.Ingredient;
-import com.magda.recipesearch.SearchResult;
+import com.magda.recipesearch.model.Ingredient;
+import com.magda.recipesearch.model.SearchResult;
 import com.magda.recipesearch.crawler.CrawlerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

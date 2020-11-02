@@ -1,7 +1,7 @@
 package com.magda.recipesearch.crawler;
 
-import com.magda.recipesearch.Recipe;
-import com.magda.recipesearch.SearchResult;
+import com.magda.recipesearch.model.Recipe;
+import com.magda.recipesearch.model.SearchResult;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;

@@ -1,4 +1,4 @@
-package com.magda.recipesearch;
+package com.magda.recipesearch.model;
 
 public enum Ingredient {
 
